@@ -12,5 +12,10 @@ services:
     tty: true
     environment:
     - CHOKIDAR_USEPOLLING=true
+    networks:
+      - filma-api_default
+networks:
+  filma-api_default:
+    external: true
 volumes:
   node_modules_volume:

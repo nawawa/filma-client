@@ -1,12 +1,20 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+
+  privateRuntimeConfig: {
+    apiURL: process.env.API_URL,
+  },
+  publicRuntimeConfig: {
+    apiURL: process.env.NODE_ENV !== 'production' ? process.env.API_URL : '',
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - filma-client',
-    title: 'filma-client',
+    titleTemplate: '%s - Filma',
+    title: 'Filma',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
