@@ -1,6 +1,6 @@
 <template>
   <p>
-    {{ data }}
+    {{ message }}
   </p>
 </template>
 
@@ -9,7 +9,7 @@ import axios from 'axios';
 export default {
   async asyncData({ $config: { apiURL } }) {
     const { data } = await axios.get(`${apiURL}/test`);
-    return data
+    return { message: data.message }
   },
 }
 </script>
