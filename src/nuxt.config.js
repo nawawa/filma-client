@@ -1,6 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  
+  axios: {
+    baseURL: 'http://localhost:8080/api', // Used as fallback if no runtime config is provided
+    credentials: true,
+  },
 
   privateRuntimeConfig: {
     apiURL: process.env.API_URL,
@@ -46,6 +51,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
