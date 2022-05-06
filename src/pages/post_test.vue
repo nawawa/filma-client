@@ -7,7 +7,7 @@
 <script>
 export default {
   async asyncData({ $axios }) {
-    const data = await $axios.$get(`/api/test`);
+    const data = await $axios.$post(`/api/test`);
     return { message: data.message }
   },
 }

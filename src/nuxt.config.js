@@ -3,15 +3,27 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   
   axios: {
-    baseURL: 'http://localhost:8080/api', // Used as fallback if no runtime config is provided
+    prefix: 'http://filma-api-web-1:80', // baseURLの代わり
+    proxy: true,
     credentials: true,
   },
 
+  proxy: {
+    '/api/': 'http://filma-api-web-1:80',
+  },
+
+  // proxyオプションが有効な場合は、browserBaseURLのデフォルトはprefixになる
+    // またbaseURLも利用できないので、baseURLもprefixに記載する
+
   privateRuntimeConfig: {
-    apiURL: process.env.API_URL,
+    axios: {
+      prefix: process.env.API_URL,
+    }
   },
   publicRuntimeConfig: {
-    apiURL: process.env.NODE_ENV !== 'production' ? process.env.API_URL : '',
+    axios: {
+      browserBaseURL: process.env.NODE_ENV !== 'production' ? process.env.API_URL : '',
+    }
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
