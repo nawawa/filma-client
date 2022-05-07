@@ -9,11 +9,8 @@ export default {
   },
 
   proxy: {
-    '/api/': 'http://filma-api-web-1:80',
+    '/api/': 'http://localhost:8080',
   },
-
-  // proxyオプションが有効な場合は、browserBaseURLのデフォルトはprefixになる
-    // またbaseURLも利用できないので、baseURLもprefixに記載する
 
   privateRuntimeConfig: {
     axios: {
@@ -22,7 +19,8 @@ export default {
   },
   publicRuntimeConfig: {
     axios: {
-      browserBaseURL: process.env.NODE_ENV !== 'production' ? process.env.API_URL : '',
+      // browserBaseURL: process.env.NODE_ENV !== 'production' ? process.env.API_URL : '',
+      browserBaseURL: process.env.NODE_ENV !== 'production' ? 'http://0.0.0.0:8080' : '',
     }
   },
 
