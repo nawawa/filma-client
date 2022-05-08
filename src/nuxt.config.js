@@ -19,7 +19,6 @@ export default {
   },
   publicRuntimeConfig: {
     axios: {
-      // browserBaseURL: process.env.NODE_ENV !== 'production' ? process.env.API_URL : '',
       browserBaseURL: process.env.NODE_ENV !== 'production' ? 'http://0.0.0.0:8080' : '',
     }
   },
