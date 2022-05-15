@@ -9,7 +9,37 @@ export default {
   },
 
   proxy: {
-    '/api/': 'http://localhost:8080',
+    '/laravel': {
+      target: 'http://0.0.0.0:4001',
+      pathRewrite: { '^/laravel': '/' }
+    },
+    '/api/': 'http://0.0.0.0:8080',
+  },
+
+  auth: {
+    redirect: {
+      login: '/login', // ログインが必要な場合、ユーザーはこのパスにリダイレクトされます。
+      logout: '/', // ログアウト後、現在の経路が保護されている場合、このパスにリダイレクトされます。
+      callback: '/login', // ユーザーはログイン後、IDプロバイダによってこのパスにリダイレクトされます。
+      home: '/login_user' // ログイン後、このパスにリダイレクトされます。
+    },
+    strategies: {
+      laravelSanctum: {
+        provider: 'laravel/sanctum',
+        url: 'http://0.0.0.0:8080',
+        cookie: {
+          // (オプション) 設定されている場合、ログインチェックのためにこのクッキーの存在を確認します。
+          name: 'XSRF-TOKEN',
+        },
+        endpoints: {
+          login: { url: '/auth/login', method: 'post' },
+          // (オプション) 設定された場合、ログイン前にこのエンドポイントに get リクエストを送信します。
+          csrf: {
+            url: '/sanctum/csrf-cookie'
+          }
+        }
+      }
+    }
   },
 
   privateRuntimeConfig: {
@@ -58,9 +88,14 @@ export default {
     '@nuxtjs/vuetify',
   ],
 
+  router: {
+    middleware: ['auth']
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

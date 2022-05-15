@@ -17,7 +17,6 @@
 
 <script>
 export default {
-  middleware: 'unAuthenticated',
   data() {
     return {
       email: '',
@@ -26,11 +25,24 @@ export default {
   },
   methods: {
     async submit() {
-      await this.$store.dispatch('auth/login', {
-        email: this.email,
-        password: this.password,
+      await this.$auth.loginWith('laravelSanctum', {
+        data: {
+          email: this.email,
+          password: this.password
+        }
       })
-      this.$router.push('/login_user')
+        .then((res) => {
+          // this.$auth.setUser(res.data)
+          this.$router.push('/login_user');
+        })
+        .catch(err => {
+          if (!err.config) {
+            console.log(err);
+          }
+          console.log(err.config);
+          console.log(err.request);
+          console.log(err.response);
+        });
     },
   },
 }

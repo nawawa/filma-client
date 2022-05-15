@@ -6,6 +6,9 @@
 
 <script>
 export default {
-  middleware: 'authenticated',
+  mounted() {
+    console.log(this.$store.state.auth.user);
+    console.log(this.$store.state.auth.loggedIn);
+  }
 }
 </script>
