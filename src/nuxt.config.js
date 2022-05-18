@@ -20,8 +20,8 @@ export default {
     redirect: {
       login: '/login', // ログインが必要な場合、ユーザーはこのパスにリダイレクトされます。
       logout: '/', // ログアウト後、現在の経路が保護されている場合、このパスにリダイレクトされます。
-      callback: '/login', // ユーザーはログイン後、IDプロバイダによってこのパスにリダイレクトされます。
-      home: '/login_user' // ログイン後、このパスにリダイレクトされます。
+      callback: '/', // ユーザーはログイン後、IDプロバイダによってこのパスにリダイレクトされます。(アプリ/クライアントで設定したAllowed Callback URLs (または同様の設定) とIDプロバイダが一致する必要があります)
+      home: '/' // ログイン後、このパスにリダイレクトされます。
     },
     strategies: {
       laravelSanctum: {
@@ -32,14 +32,19 @@ export default {
           name: 'XSRF-TOKEN',
         },
         endpoints: {
-          login: { url: '/auth/login', method: 'post' },
           // (オプション) 設定された場合、ログイン前にこのエンドポイントに get リクエストを送信します。
           csrf: {
             url: '/sanctum/csrf-cookie'
-          }
+          },
+          login: { url: '/auth/login', method: 'post' },
+          logout: { url: '/auth/logout', method: 'post' },
         }
       }
     }
+  },
+
+  router: {
+    middleware: ['auth']
   },
 
   privateRuntimeConfig: {
@@ -87,10 +92,6 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
-
-  router: {
-    middleware: ['auth']
-  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

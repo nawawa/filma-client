@@ -60,6 +60,22 @@
           >
             Nuxt GitHub
           </a>
+          <br>
+          <NuxtLink to="/login">
+            ログイン
+          </NuxtLink>
+          <br>
+          <NuxtLink to="/post_test">
+            POST
+          </NuxtLink>
+          <br>
+          <NuxtLink to="/test">
+            GET
+          </NuxtLink>
+          <br>
+          <NuxtLink to="/logout">
+            ログアウト
+          </NuxtLink>
         </v-card-text>
         <v-card-actions>
           <v-spacer />

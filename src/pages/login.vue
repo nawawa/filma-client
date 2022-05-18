@@ -32,16 +32,10 @@ export default {
         }
       })
         .then((res) => {
-          // this.$auth.setUser(res.data)
-          this.$router.push('/login_user');
+          
         })
         .catch(err => {
-          if (!err.config) {
-            console.log(err);
-          }
-          console.log(err.config);
-          console.log(err.request);
-          console.log(err.response);
+
         });
     },
   },
