@@ -3,17 +3,17 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   
   axios: {
-    prefix: 'http://filma-api-web-1:80', // baseURLの代わり
+    prefix: process.env.API_URL, // baseURLの代わり
     proxy: true,
     credentials: true,
   },
 
   proxy: {
     '/laravel': {
-      target: 'http://0.0.0.0:4001',
+      target: process.env.NODE_URL,
       pathRewrite: { '^/laravel': '/' }
     },
-    '/api/': 'http://0.0.0.0:8080',
+    '/api/': process.env.SERVER_URL,
   },
 
   auth: {
@@ -26,7 +26,7 @@ export default {
     strategies: {
       laravelSanctum: {
         provider: 'laravel/sanctum',
-        url: 'http://0.0.0.0:8080',
+        url: process.env.SERVER_URL,
         cookie: {
           // (オプション) 設定されている場合、ログインチェックのためにこのクッキーの存在を確認します。
           name: 'XSRF-TOKEN',
@@ -54,7 +54,7 @@ export default {
   },
   publicRuntimeConfig: {
     axios: {
-      browserBaseURL: process.env.NODE_ENV !== 'production' ? 'http://0.0.0.0:8080' : '',
+      browserBaseURL: process.env.NODE_ENV !== 'production' ? process.env.SERVER_URL : '',
     }
   },
 
