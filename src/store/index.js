@@ -1,13 +1,13 @@
 export const actions = {
-  async nuxtServerInit({ commit }, { req, app }) {
+  async nuxtServerInit({ commit }, { app }) {
+    
     await app.$axios
       .$get('/api/user')
       .then((authUser) => {
-        commit('auth_user/setAuthUser', authUser)
+        app.$auth.setUser(authUser)
       })
       .catch((err) => {
-        console.log(err)
-        commit('auth_user/setAuthUser', null)
+        app.$auth.setUser(null)
       })
 
   }

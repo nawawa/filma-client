@@ -1,5 +1,5 @@
 export default function ({ store, redirect }) {
-  if (store.state.auth_user.authUser) {
+  if (store.state.auth.user) {
     return redirect('/')
   }
 }
