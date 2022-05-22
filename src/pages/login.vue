@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  middleware: 'login_page',
   data() {
     return {
       email: '',
@@ -32,7 +33,6 @@ export default {
         }
       })
         .then((res) => {
-          
         })
         .catch(err => {
 

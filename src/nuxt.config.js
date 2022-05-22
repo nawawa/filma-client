@@ -47,6 +47,10 @@ export default {
     middleware: ['auth']
   },
 
+  serverMidlleware: [
+    { path: '/login', handler: '~/middleware/login_page' }
+  ],
+
   privateRuntimeConfig: {
     axios: {
       prefix: process.env.API_URL,
@@ -96,7 +100,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    'cookie-universal-nuxt',
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
